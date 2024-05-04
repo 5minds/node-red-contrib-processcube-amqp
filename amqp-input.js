@@ -15,19 +15,38 @@ module.exports = function(RED) {
         var flowContext = node.context().flow;
 
         const amqpServer = RED.nodes.getNode(config.amqpServer);
+
+        async function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
   
+        async function createConnection() {
+
+            while (true) {
+                try {
+                    return await amqplib.connect(amqpServer.connectionString);
+                } catch (e) {
+                    await sleep(500);
+                }
+            }
+        }
+
         async function initNode() {
             var connection = flowContext.get('amqpConnection');
 
             if (!connection) {
-                connection = await amqplib.connect(amqpServer.connectionString);
+                connection = await createConnection();
                 flowContext.set('amqpConnection', connection);
+                connection.on("close", async () => {
+                    flowContext.set('amqpConnection', undefined);
+                    await initNode();
+                });
             }
     
             const channel = await connection.createChannel();
-            await channel.assertExchange('Test', 'fanout');
-            const queue = await channel.assertQueue('TestQueue');
-            await channel.bindQueue(queue.queue, 'Test', '');
+            await channel.assertExchange(config.exchange, 'fanout');
+            const queue = await channel.assertQueue(config.queue);
+            await channel.bindQueue(queue.queue, config.exchange, '');
     
             await channel.consume(queue.queue, async (message) => {
                 const msg = {

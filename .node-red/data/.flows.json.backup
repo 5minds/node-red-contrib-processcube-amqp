@@ -18,6 +18,7 @@
         "z": "ea5e703747705005",
         "name": "",
         "amqpServer": "cbcfcb0a896f9765",
+        "exchange": "Test",
         "x": 210,
         "y": 280,
         "wires": [
@@ -39,7 +40,38 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 600,
-        "y": 280,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6edcaa30a342930f",
+        "type": "amqp-input",
+        "z": "ea5e703747705005",
+        "name": "",
+        "amqpServer": "cbcfcb0a896f9765",
+        "exchange": "Test2",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "9b6cc140501fded9"
+            ]
+        ]
+    },
+    {
+        "id": "9b6cc140501fded9",
+        "type": "debug",
+        "z": "ea5e703747705005",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 400,
         "wires": []
     }
 ]

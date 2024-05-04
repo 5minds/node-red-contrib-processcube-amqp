@@ -5,6 +5,8 @@
         defaults: {
             name: {value: "", type: "string"},
             amqpServer: {value: "", type: "amqp-config"},
+            exchange: {value: "", type: "string", required:true},
+            queue: {value: "", type: "string", required:true}
         },
         inputs: 0,
         outputs: 1,
@@ -23,6 +25,14 @@
     <div class="form-row">
         <label for="node-input-amqpServer"><i class="fa fa-tag"></i> AMQP Server</label>
         <input type="text" id="node-input-amqpServer" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-exchange"><i class="fa fa-tag"></i> Exchange</label>
+        <input type="text" id="node-input-exchange" placeholder="Exchange">
+    </div>
+    <div class="form-row">
+        <label for="node-input-queue"><i class="fa fa-tag"></i> Queue</label>
+        <input type="text" id="node-input-queue" placeholder="Queue">
     </div>
 </script>
 
