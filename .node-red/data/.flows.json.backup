@@ -19,6 +19,7 @@
         "name": "",
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test",
+        "queue": "Test",
         "x": 210,
         "y": 280,
         "wires": [
@@ -50,6 +51,7 @@
         "name": "",
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test2",
+        "queue": "Test2",
         "x": 210,
         "y": 380,
         "wires": [

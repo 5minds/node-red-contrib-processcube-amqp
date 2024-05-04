@@ -435,12 +435,14 @@
         "nodes": {
             "amqpInput": {
                 "name": "amqpInput",
-                "types": [],
+                "types": [
+                    "amqp-input"
+                ],
                 "enabled": true,
                 "local": true,
                 "user": false,
                 "module": "@5minds/node-red-contrib-processcube-amqp",
-                "file": "/data/node_modules/node-red-contrib-processcube-amqp/ampq-input.js"
+                "file": "/data/node_modules/node-red-contrib-processcube-amqp/amqp-input.js"
             },
             "amqpConfig": {
                 "name": "amqpConfig",

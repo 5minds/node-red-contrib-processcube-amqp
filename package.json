@@ -28,6 +28,7 @@
         "version": ">=3.1.9",
         "nodes": {
             "amqpInput": "amqp-input.js",
+            "amqpOutput": "amqp-output.js",
             "amqpConfig": "amqp-config.js"
         }
     },
