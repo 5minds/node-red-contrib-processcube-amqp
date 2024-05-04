@@ -44,9 +44,9 @@ module.exports = function(RED) {
             }
     
             const channel = await connection.createChannel();
-            await channel.assertExchange(config.exchange, 'fanout');
+            await channel.assertExchange(config.exchange, config.exchangeType);
             const queue = await channel.assertQueue(config.queue);
-            await channel.bindQueue(queue.queue, config.exchange, '');
+            await channel.bindQueue(queue.queue, config.exchange, config.routingKey);
     
             await channel.consume(queue.queue, async (message) => {
                 const msg = {

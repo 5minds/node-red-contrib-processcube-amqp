@@ -36,9 +36,9 @@ module.exports = function(RED) {
             }
     
             const channel = await connection.createChannel();
-            await channel.assertExchange(config.exchange, 'fanout');
+            await channel.assertExchange(config.exchange, config.exchangeType);
     
-            await channel.publish(config.exchange, '', Buffer.from(JSON.stringify(msg.payload)));
+            await channel.publish(config.exchange, config.routingKey, Buffer.from(JSON.stringify(msg.payload)));
             await channel.close();
         });
         

@@ -6,6 +6,8 @@
             name: {value: "", type: "string"},
             amqpServer: {value: "", type: "amqp-config"},
             exchange: {value: "", type: "string", required:true},
+            exchangeType: { value: 'fanout'},
+            routingKey: { value: "" },
             queue: {value: "", type: "string", required:true}
         },
         inputs: 0,
@@ -13,7 +15,19 @@
         icon: "font-awesome/fa-envelope-open",
         label: function() {
             return this.name||"amqp-input";
-        }
+        },
+        oneditprepare: function () {
+
+            $('#node-input-exchangeType').change(function (e) {
+                const exchangeType = this.value
+
+                if (['fanout'].includes(exchangeType)) {
+                    $('.routing-key-form-input').hide()
+                } else {
+                    $('.routing-key-form-input').show()
+                }
+            })
+        },
     });
 </script>
 
@@ -26,9 +40,21 @@
         <label for="node-input-amqpServer"><i class="fa fa-tag"></i> AMQP Server</label>
         <input type="text" id="node-input-amqpServer" placeholder="">
     </div>
+    <div class="form-row wide-label-amqp-in">
+        <label for="node-input-exchangeType"><i class="fa fa-filter"></i>&nbsp;&nbsp;Type</label>
+        <select id="node-input-exchangeType">
+          <option value="topic">Topic</option>
+          <option value="direct">Direct</option>
+          <option value="fanout">Fanout</option>
+        </select>
+      </div>
     <div class="form-row">
         <label for="node-input-exchange"><i class="fa fa-tag"></i> Exchange</label>
         <input type="text" id="node-input-exchange" placeholder="Exchange">
+    </div>
+    <div class="form-row wide-label-amqp-in routing-key-form-input">
+        <label for="node-input-routingKey"><i class="fa fa-filter"></i>&nbsp;&nbsp;Routing Key</label>
+        <input type="text" id="node-input-routingKey">
     </div>
     <div class="form-row">
         <label for="node-input-queue"><i class="fa fa-tag"></i> Queue</label>

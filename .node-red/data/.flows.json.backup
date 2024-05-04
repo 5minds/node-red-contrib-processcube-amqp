@@ -19,6 +19,7 @@
         "name": "",
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test",
+        "exchangeType": "fanout",
         "queue": "Test",
         "x": 210,
         "y": 280,
@@ -51,6 +52,8 @@
         "name": "",
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test2",
+        "exchangeType": "topic",
+        "routingKey": "test.*",
         "queue": "Test2",
         "x": 210,
         "y": 380,
@@ -75,5 +78,47 @@
         "x": 620,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "b6e1bc8cac43d73d",
+        "type": "amqp-output",
+        "z": "ea5e703747705005",
+        "name": "",
+        "amqpServer": "cbcfcb0a896f9765",
+        "exchange": "Test2",
+        "exchangeType": "topic",
+        "routingKey": "test",
+        "x": 630,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "56ef19c049ed6483",
+        "type": "inject",
+        "z": "ea5e703747705005",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"test\": 1123 }",
+        "payloadType": "json",
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "b6e1bc8cac43d73d"
+            ]
+        ]
     }
 ]
