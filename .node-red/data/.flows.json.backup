@@ -20,6 +20,7 @@
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test",
         "exchangeType": "fanout",
+        "routingKey": "",
         "queue": "Test",
         "x": 210,
         "y": 280,
@@ -87,9 +88,9 @@
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test2",
         "exchangeType": "topic",
-        "routingKey": "test",
+        "routingKey": "test.test",
         "x": 630,
-        "y": 140,
+        "y": 160,
         "wires": []
     },
     {

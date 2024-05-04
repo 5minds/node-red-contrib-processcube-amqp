@@ -29,10 +29,6 @@ module.exports = function(RED) {
             if (!connection) {
                 connection = await createConnection();
                 flowContext.set('amqpConnection', connection);
-                connection.on("close", async () => {
-                    flowContext.set('amqpConnection', undefined);
-                    await initNode();
-                });
             }
     
             const channel = await connection.createChannel();

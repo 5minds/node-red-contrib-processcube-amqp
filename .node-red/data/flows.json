@@ -20,6 +20,7 @@
         "amqpServer": "cbcfcb0a896f9765",
         "exchange": "Test",
         "exchangeType": "fanout",
+        "routingKey": "",
         "queue": "Test",
         "x": 210,
         "y": 280,
