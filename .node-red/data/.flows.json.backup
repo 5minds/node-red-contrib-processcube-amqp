@@ -1,0 +1,45 @@
+[
+    {
+        "id": "ea5e703747705005",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cbcfcb0a896f9765",
+        "type": "amqp-config",
+        "connectionString": "amqp://rabbitmq"
+    },
+    {
+        "id": "bbe3c2bf3494853d",
+        "type": "amqp-input",
+        "z": "ea5e703747705005",
+        "name": "",
+        "amqpServer": "cbcfcb0a896f9765",
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "ad189622d10f3966"
+            ]
+        ]
+    },
+    {
+        "id": "ad189622d10f3966",
+        "type": "debug",
+        "z": "ea5e703747705005",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 280,
+        "wires": []
+    }
+]

@@ -1,0 +1,42 @@
+{
+    "name": "@5minds/node-red-contrib-processcube-amqp",
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Node-RED nodes for AMQP",
+    "authors": [{
+            "name": "Martin Moellenbeck",
+            "email": "Martin.Moellenbeck@5Minds.de"
+        },
+        {
+            "name": "Robin Lenz",
+            "email": "Robin.Lenz@5Minds.de"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/5minds/node-red-contrib-processcube-amqp"
+    },
+    "bugs": {
+        "url": "https://github.com/5minds/node-red-contrib-processcube-amqp",
+        "email": "processcube@5minds.de"
+    },
+    "engines": {
+        "node": ">=14",
+        "npm": ">=9.8"
+    },
+    "node-red": {
+        "version": ">=3.1.9",
+        "nodes": {
+            "amqpInput": "amqp-input.js",
+            "amqpConfig": "amqp-config.js"
+        }
+    },
+    "dependencies": {
+        "amqplib": "0.10.4"
+    },
+    "keywords": [
+        "node-red",
+        "processcube",
+        "amqp"
+    ]
+}

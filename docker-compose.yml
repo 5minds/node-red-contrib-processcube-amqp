@@ -1,0 +1,18 @@
+services:
+  node-red:
+    image: 5minds/node-red:latest
+    build:
+      context: .
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./.node-red/data:/data
+      - ./:/data/node_modules/node-red-contrib-processcube-amqp
+  
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"

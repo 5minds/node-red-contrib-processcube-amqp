@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('amqp-input',{
+        category: 'ProcessCube',
+        color: '#00aed7',
+        defaults: {
+            name: {value: "", type: "string"},
+            amqpServer: {value: "", type: "amqp-config"},
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: "font-awesome/fa-envelope-open",
+        label: function() {
+            return this.name||"amqp-input";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="amqp-input">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-amqpServer"><i class="fa fa-tag"></i> AMQP Server</label>
+        <input type="text" id="node-input-amqpServer" placeholder="">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="amqp-input">
+    <p>A node to consume AMQP Messages.</p>
+</script>

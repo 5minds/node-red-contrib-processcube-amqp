@@ -1,0 +1,18 @@
+<script type="text/javascript">
+    RED.nodes.registerType('amqp-config',{
+        category: 'config',
+        defaults: {
+            connectionString: {value:"amqp://localhost:5672",required:true}
+        },
+        label: function() {
+            return this.connectionString;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="amqp-config">
+    <div class="form-row">
+        <label for="node-config-input-connectionString"><i class="fa fa-bookmark"></i> ConnectionString</label>
+        <input type="text" id="node-config-input-connectionString">
+    </div>
+</script>
