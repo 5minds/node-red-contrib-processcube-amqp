@@ -40,6 +40,8 @@
     "keywords": [
         "node-red",
         "processcube",
-        "amqp"
+        "amqp",
+        "messagebus",
+        "rabbitmq"
     ]
 }
