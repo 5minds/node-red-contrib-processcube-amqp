@@ -1,4 +1,5 @@
 const amqplib = require('amqplib');
+const AMQPConnection = require('./amqp-connection');
 
 module.exports = function(RED) {
     function AMQPOutput(config) {
@@ -8,26 +9,11 @@ module.exports = function(RED) {
 
         const amqpServer = RED.nodes.getNode(config.amqpServer);
 
-        async function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-  
-        async function createConnection() {
-
-            while (true) {
-                try {
-                    return await amqplib.connect(amqpServer.connectionString);
-                } catch (e) {
-                    await sleep(500);
-                }
-            }
-        }
-
         node.on('input', async (msg) => {
             var connection = flowContext.get('amqpConnection');
 
             if (!connection) {
-                connection = await createConnection();
+                connection = new AMQPConnection(amqpServer.connectionString);
                 flowContext.set('amqpConnection', connection);
             }
     

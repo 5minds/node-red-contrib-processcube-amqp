@@ -3,7 +3,8 @@
     "version": "0.1.0",
     "license": "MIT",
     "description": "Node-RED nodes for AMQP",
-    "authors": [{
+    "authors": [
+        {
             "name": "Martin Moellenbeck",
             "email": "Martin.Moellenbeck@5Minds.de"
         },
@@ -33,7 +34,8 @@
         }
     },
     "dependencies": {
-        "amqplib": "0.10.4"
+        "amqplib": "0.10.4",
+        "uuid": "^9.0.1"
     },
     "keywords": [
         "node-red",

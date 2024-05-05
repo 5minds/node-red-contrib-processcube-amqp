@@ -23,7 +23,7 @@
         "routingKey": "",
         "queue": "Test",
         "x": 210,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "ad189622d10f3966"
@@ -42,8 +42,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
-        "y": 320,
+        "x": 620,
+        "y": 260,
         "wires": []
     },
     {
@@ -90,7 +90,7 @@
         "exchangeType": "topic",
         "routingKey": "test.test",
         "x": 630,
-        "y": 160,
+        "y": 140,
         "wires": []
     },
     {

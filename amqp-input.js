@@ -1,4 +1,4 @@
-const amqplib = require('amqplib');
+const AMQPConnection = require('./amqp-connection');
 
 function showStatus(node, msgCounter) {
     if (msgCounter >= 1) {
@@ -9,6 +9,7 @@ function showStatus(node, msgCounter) {
 }
 
 module.exports = function(RED) {
+
     function AMQPInput(config) {
         RED.nodes.createNode(this,config);
         var node = this;
@@ -16,31 +17,13 @@ module.exports = function(RED) {
 
         const amqpServer = RED.nodes.getNode(config.amqpServer);
 
-        async function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-  
-        async function createConnection() {
-
-            while (true) {
-                try {
-                    return await amqplib.connect(amqpServer.connectionString);
-                } catch (e) {
-                    await sleep(500);
-                }
-            }
-        }
-
         async function initNode() {
             var connection = flowContext.get('amqpConnection');
 
             if (!connection) {
-                connection = await createConnection();
+                connection = new AMQPConnection(amqpServer.connectionString);
                 flowContext.set('amqpConnection', connection);
-                connection.on("close", async () => {
-                    flowContext.set('amqpConnection', undefined);
-                    await initNode();
-                });
+                await connection.connect();
             }
     
             const channel = await connection.createChannel();
@@ -57,8 +40,19 @@ module.exports = function(RED) {
                 channel.ack(message);
             });
 
+            const onCloseHandlerId = connection.onClose(async () => {
+                console.log('onClose connection');
+                await initNode();
+            });
+
             node.on("close", async () => {
-                await channel.close();
+                console.log('closeChannel');
+                try {
+                    await channel.close();
+                    connection.removeOnCloseHandler(onCloseHandlerId);
+                } catch {
+                    console.warn('Channel closed');
+                }
             });
         }
         initNode();
