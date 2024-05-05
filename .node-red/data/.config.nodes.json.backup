@@ -444,6 +444,17 @@
                 "module": "@5minds/node-red-contrib-processcube-amqp",
                 "file": "/data/node_modules/node-red-contrib-processcube-amqp/amqp-input.js"
             },
+            "amqpOutput": {
+                "name": "amqpOutput",
+                "types": [
+                    "amqp-output"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "@5minds/node-red-contrib-processcube-amqp",
+                "file": "/data/node_modules/node-red-contrib-processcube-amqp/amqp-output.js"
+            },
             "amqpConfig": {
                 "name": "amqpConfig",
                 "types": [
