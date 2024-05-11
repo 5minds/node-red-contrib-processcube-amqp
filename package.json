@@ -1,6 +1,6 @@
 {
     "name": "@5minds/node-red-contrib-processcube-amqp",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "license": "MIT",
     "description": "Node-RED nodes for AMQP",
     "authors": [
