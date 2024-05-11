@@ -23,7 +23,7 @@
         "routingKey": "",
         "queue": "Test",
         "x": 210,
-        "y": 260,
+        "y": 240,
         "wires": [
             [
                 "ad189622d10f3966"
@@ -52,9 +52,10 @@
         "z": "ea5e703747705005",
         "name": "",
         "amqpServer": "cbcfcb0a896f9765",
-        "exchange": "Test2__",
+        "exchange": "Test2",
         "exchangeType": "topic",
-        "routingKey": "test.*",
+        "routingKey": "test.${TEST}",
+        "routingKeyFieldType": "env",
         "queue": "Test2",
         "x": 210,
         "y": 380,

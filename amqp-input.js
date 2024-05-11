@@ -25,11 +25,13 @@ module.exports = function(RED) {
                 flowContext.set('amqpConnection', connection);
                 await connection.connect();
             }
+
+            const routingKey = (config.exchangeType == 'topic') ? RED.util.evaluateNodeProperty(config.routingKey, config.routingKeyFieldType, node) : '';
     
             const channel = await connection.createChannel();
             await channel.assertExchange(config.exchange, config.exchangeType);
             const queue = await channel.assertQueue(config.queue);
-            await channel.bindQueue(queue.queue, config.exchange, config.routingKey);
+            await channel.bindQueue(queue.queue, config.exchange, routingKey);
     
             await channel.consume(queue.queue, async (message) => {
                 const msg = {

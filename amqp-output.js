@@ -16,11 +16,13 @@ module.exports = function(RED) {
                 connection = new AMQPConnection(amqpServer.connectionString);
                 flowContext.set('amqpConnection', connection);
             }
+
+            const routingKey = (config.exchangeType == 'topic') ? RED.util.evaluateNodeProperty(config.routingKey, config.routingKeyFieldType, node) : '';
     
             const channel = await connection.createChannel();
             await channel.assertExchange(config.exchange, config.exchangeType);
     
-            await channel.publish(config.exchange, config.routingKey, Buffer.from(JSON.stringify(msg.payload)));
+            await channel.publish(config.exchange, routingKey, Buffer.from(JSON.stringify(msg.payload)));
             await channel.close();
         });
         

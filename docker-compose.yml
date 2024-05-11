@@ -5,6 +5,7 @@ services:
       context: .
     environment:
       - TZ=Europe/Berlin
+      - TEST=hallo
     ports:
       - "1880:1880"
     volumes:
