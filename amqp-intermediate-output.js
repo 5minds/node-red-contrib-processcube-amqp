@@ -1,8 +1,5 @@
-const amqplib = require('amqplib');
-const AMQPConnection = require('./amqp-connection');
-
 module.exports = function(RED) {
-    function AMQPOutput(config) {
+    function AMQPIntermediateOutput(config) {
         RED.nodes.createNode(this,config);
         var node = this;
         var flowContext = node.context().flow;
@@ -23,8 +20,10 @@ module.exports = function(RED) {
     
             await channel.publish(config.exchange, routingKey, Buffer.from(JSON.stringify(msg.payload)));
             await channel.close();
+
+            node.send(msg);
         });
         
     }
-    RED.nodes.registerType("amqp-output", AMQPOutput);
+    RED.nodes.registerType("amqp-intermediate-output", AMQPIntermediateOutput);
 }

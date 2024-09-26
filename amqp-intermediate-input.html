@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    RED.nodes.registerType('amqp-intermediate-input',{
+        category: 'ProcessCube (MQ)',
+        color: '#00aed7',
+        defaults: {
+            name: {value: "", type: "string"},
+            amqpServer: {value: "", type: "amqp-config"},
+            exchange: {value: "", type: "string", required:true},
+            exchangeType: { value: 'fanout'},
+            routingKey: { value: "" },
+            routingKeyFieldType: { value: "str"},
+            queue: {value: "", type: "string", required:true}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-envelope-open",
+        label: function() {
+            return this.name||"amqp-intermediate-input";
+        },
+        oneditprepare: function () {
+
+            $('#node-input-exchangeType').change(function (e) {
+                const exchangeType = this.value
+
+                if (['fanout'].includes(exchangeType)) {
+                    $('.routing-key-form-input').hide()
+                } else {
+                    $('.routing-key-form-input').show()
+                }
+            })
+
+            $("#node-input-routingKey").typedInput({
+                typeField: "#node-input-routingKeyFieldType",
+                types: ["str","env"]
+            });
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="amqp-intermediate-input">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-amqpServer"><i class="fa fa-tag"></i> AMQP Server</label>
+        <input type="text" id="node-input-amqpServer" placeholder="">
+    </div>
+    <div class="form-row wide-label-amqp-in">
+        <label for="node-input-exchangeType"><i class="fa fa-filter"></i>&nbsp;&nbsp;Type</label>
+        <select id="node-input-exchangeType">
+          <option value="topic">Topic</option>
+          <option value="direct">Direct</option>
+          <option value="fanout">Fanout</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-exchange"><i class="fa fa-tag"></i> Exchange</label>
+        <input type="text" id="node-input-exchange" placeholder="Exchange">
+    </div>
+    <div class="form-row routing-key-form-input">
+        <label>Routing key:</label>
+        <input type="text" id="node-input-routingKey">
+        <input type="hidden" id="node-input-routingKeyFieldType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-queue"><i class="fa fa-tag"></i> Queue</label>
+        <input type="text" id="node-input-queue" placeholder="Queue">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="amqp-intermediate-input">
+    <p>A node to consume AMQP Messages.</p>
+</script>

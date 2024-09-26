@@ -1,7 +1,7 @@
 {
     "node-red": {
         "name": "node-red",
-        "version": "3.1.9",
+        "version": "4.0.3",
         "local": false,
         "user": false,
         "nodes": {
@@ -429,7 +429,7 @@
     },
     "@5minds/node-red-contrib-processcube-amqp": {
         "name": "@5minds/node-red-contrib-processcube-amqp",
-        "version": "0.2.0",
+        "version": "0.5.0",
         "local": true,
         "user": false,
         "nodes": {
@@ -443,6 +443,17 @@
                 "user": false,
                 "module": "@5minds/node-red-contrib-processcube-amqp",
                 "file": "/data/node_modules/node-red-contrib-processcube-amqp/amqp-input.js"
+            },
+            "amqpIntermediateInput": {
+                "name": "amqpIntermediateInput",
+                "types": [
+                    "amqp-intermediate-input"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "@5minds/node-red-contrib-processcube-amqp",
+                "file": "/data/node_modules/node-red-contrib-processcube-amqp/amqp-intermediate-input.js"
             },
             "amqpOutput": {
                 "name": "amqpOutput",

@@ -8,7 +8,7 @@ function showStatus(node, msgCounter) {
 
 module.exports = function(RED) {
 
-    function AMQPInput(config) {
+    function AMQPIntermediateInput(config) {
         RED.nodes.createNode(this,config);
         var node = this;
 
@@ -28,13 +28,16 @@ module.exports = function(RED) {
             const queue = await channel.assertQueue(config.queue);
             await channel.bindQueue(queue.queue, config.exchange, routingKey);
     
-            await channel.consume(queue.queue, async (message) => {
-                const msg = {
-                    payload: JSON.parse(message.content.toString())
-                };
-    
-                node.send(msg);
-                channel.ack(message);
+            node.on('input', async function (msg) {
+
+                await channel.prefetch(1);
+                await channel.consume(queue.queue, async (message) => {
+                    channel.cancel(msg._msgid);
+                    msg.payload = JSON.parse(message.content.toString());
+        
+                    node.send(msg);
+                    channel.ack(message);
+                }, { consumerTag: msg._msgid});
             });
 
             const onCloseHandlerId = connection.onClose(async () => {
@@ -54,5 +57,5 @@ module.exports = function(RED) {
         }
         initNode();
     }
-    RED.nodes.registerType("amqp-input", AMQPInput);
+    RED.nodes.registerType("amqp-intermediate-input", AMQPIntermediateInput);
 }

@@ -117,11 +117,138 @@
         "payload": "{\"test\": 1123 }",
         "payloadType": "json",
         "x": 250,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "b6e1bc8cac43d73d"
             ]
         ]
+    },
+    {
+        "id": "674b6dfdd29d03ff",
+        "type": "inject",
+        "z": "ea5e703747705005",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 480,
+        "wires": [
+            [
+                "80b6a88a75218de8"
+            ]
+        ]
+    },
+    {
+        "id": "80b6a88a75218de8",
+        "type": "amqp-intermediate-input",
+        "z": "ea5e703747705005",
+        "name": "",
+        "amqpServer": "cbcfcb0a896f9765",
+        "exchange": "Test2",
+        "exchangeType": "topic",
+        "routingKey": "test.${TEST}",
+        "routingKeyFieldType": "env",
+        "queue": "IntermediateQueue",
+        "x": 440,
+        "y": 480,
+        "wires": [
+            [
+                "3c9347a9984c8f4a"
+            ]
+        ]
+    },
+    {
+        "id": "3c9347a9984c8f4a",
+        "type": "debug",
+        "z": "ea5e703747705005",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "73dfe1f014cf2a95",
+        "type": "amqp-intermediate-output",
+        "z": "ea5e703747705005",
+        "name": "",
+        "amqpServer": "cbcfcb0a896f9765",
+        "exchange": "Test2",
+        "exchangeType": "topic",
+        "routingKey": "test.${TEST}",
+        "routingKeyFieldType": "env",
+        "x": 420,
+        "y": 580,
+        "wires": [
+            [
+                "ea31e27c53c0b8cb"
+            ]
+        ]
+    },
+    {
+        "id": "a5d8ae6eb5ac20de",
+        "type": "inject",
+        "z": "ea5e703747705005",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"test\":123}",
+        "payloadType": "json",
+        "x": 190,
+        "y": 580,
+        "wires": [
+            [
+                "73dfe1f014cf2a95"
+            ]
+        ]
+    },
+    {
+        "id": "ea31e27c53c0b8cb",
+        "type": "debug",
+        "z": "ea5e703747705005",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 580,
+        "wires": []
     }
 ]
