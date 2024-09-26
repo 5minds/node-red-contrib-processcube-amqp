@@ -7,9 +7,7 @@ module.exports = function(RED) {
         const node = this;
 
         this.connection = new AMQPConnection(this.connectionString);
-        this.connection.connect().catch((error) => {
-            node.error(error);
-        });
+        this.connection.connect();
     }
     RED.nodes.registerType("amqp-config",AMQPServerNode);
 }

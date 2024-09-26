@@ -52,6 +52,7 @@ module.exports = function(connectionString) {
             try {
                 return await amqplib.connect(connectionString);
             } catch (e) {
+                console.log(e);
                 await sleep(500);
             }
         }
