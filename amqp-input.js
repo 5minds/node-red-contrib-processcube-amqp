@@ -29,10 +29,16 @@ module.exports = function(RED) {
             await channel.bindQueue(queue.queue, config.exchange, routingKey);
     
             await channel.consume(queue.queue, async (message) => {
-                const msg = {
-                    payload: JSON.parse(message.content.toString())
-                };
+
+
+                const msg = {};
     
+                try {
+                    msg.payload = JSON.parse(message.content.toString());
+                } catch (e) {
+                    msg.payload = message.content.toString();
+                }
+
                 node.send(msg);
                 channel.ack(message);
             });

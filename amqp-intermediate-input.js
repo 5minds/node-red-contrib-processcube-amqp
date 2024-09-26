@@ -33,7 +33,11 @@ module.exports = function(RED) {
                 await channel.prefetch(1);
                 await channel.consume(queue.queue, async (message) => {
                     channel.cancel(msg._msgid);
-                    msg.payload = JSON.parse(message.content.toString());
+                    try {
+                        msg.payload = JSON.parse(message.content.toString());
+                    } catch (e) {
+                        msg.payload = message.content.toString();
+                    }
         
                     node.send(msg);
                     channel.ack(message);
