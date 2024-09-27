@@ -18,7 +18,9 @@ module.exports = function(RED) {
             const channel = await connection.createChannel();
             await channel.assertExchange(config.exchange, config.exchangeType);
     
-            await channel.publish(config.exchange, routingKey, Buffer.from(JSON.stringify(msg.payload)));
+            const message = (typeof msg.payload === 'object') ? JSON.stringify(msg.payload) : msg.payload;
+
+            await channel.publish(config.exchange, routingKey, Buffer.from(message));
             await channel.close();
 
             node.send(msg);
