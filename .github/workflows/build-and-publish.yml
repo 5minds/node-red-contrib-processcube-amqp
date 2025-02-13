@@ -7,14 +7,13 @@ on:
       - '*/*'
 
 env:
-  CI_TOOLS_VERSION: '^4.2.0'
+  CI_TOOLS_VERSION: '^5.0.0'
   # NOTE: Um den Releasezyklus von Alpha nach Beta zu ändern, einfach die nachfolgend deklarierten Env Variablen switchen.
   CI_TOOLS_ALPHA_BRANCH: next
   CI_TOOLS_ALPHA_NPM_TAG: next
-  CI_TOOLS_STABLE_BRANCH: main
   # CI_TOOLS_BETA_BRANCH: next
   # CI_TOOLS_BETA_NPM_TAG: next
-  #BOX_RELEASE_TAG: 2024-1
+  BOX_RELEASE_TAG: 2025-1
 
 jobs:
   build_and_publish:
@@ -28,10 +27,10 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use Node.js 20
+      - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install CI Tools
@@ -63,10 +62,11 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: ci_tools publish-npm-package --create-tag-from-branch-name
 
-    #   - name: Add Box-Release Tag
-    #     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-    #     env:
-    #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-    #     run: |
-    #       VERSION="$(ci_tools get-version)"
-    #       npm dist-tag add @5minds/processcube_app_sdk@$VERSION ${{ env.BOX_RELEASE_TAG }}
+      - name: Add Box-Release Tag
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION="$(ci_tools get-version)"
+          PACKAGE_NAME="$(npm pkg get name | tr -d \")"
+          npm dist-tag add $PACKAGE_NAME@$VERSION ${{ env.BOX_RELEASE_TAG }}
